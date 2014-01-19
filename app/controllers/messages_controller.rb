@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
   
   private
   def message_params
-    params[:message].permit(:body, :receiver_id)
+    params[:message].permit :body, :receiver_id
   end
   
   def message
