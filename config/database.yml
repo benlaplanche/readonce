@@ -19,8 +19,6 @@ development: &common
   encoding: unicode
   database: readonce_development
   pool: 5
-  username: action
-  password:
   host: localhost
 
   # The TCP port the server listens on. Defaults to 5432.
