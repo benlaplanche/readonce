@@ -1,13 +1,10 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
+  respond_to :html
+  
   def create
-    @message = current_user.messages.new(message_params)
-    if message.valid?
-      message.save
-      redirect_to messages_url
-    else
-      render 'new'
-    end
+    @message = current_user.messages.create(message_params)
+    respond_with message, location: messages_url
   end
   
   def new
