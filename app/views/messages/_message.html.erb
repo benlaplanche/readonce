@@ -1,0 +1,5 @@
+      <div <%= message_class %>>
+        <span class='message-sender'><%= message.sender.email %></span>
+        <time><%= time_ago_in_words message.created_at %></time>
+        <span class='message-excerpt'><%= link_to truncate(message.body), message_path(message) %></span>
+      </div>

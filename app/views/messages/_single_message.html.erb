@@ -1,0 +1,8 @@
+  <article id='message-single'>
+    <header>
+      <span class='message-sender'><%= message.sender.email %></span>
+      <time><%= time_ago_in_words message.created_at %></time>
+    </header>
+
+    <p><%= message.body %></p>
+  </div>
