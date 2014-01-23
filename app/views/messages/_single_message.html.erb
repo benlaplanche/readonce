@@ -1,3 +1,4 @@
+  <% mark_as_read(message) %>
   <article id='message-single'>
     <header>
       <span class='message-sender'><%= message.sender.email %></span>
@@ -5,4 +6,5 @@
     </header>
 
     <p><%= message.body %></p>
+    <p>Message Read: <%= message.read %></p>
   </div>

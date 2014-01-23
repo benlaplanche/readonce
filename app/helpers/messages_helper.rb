@@ -1,10 +1,10 @@
 module MessagesHelper
 
-	def messages_class
-		if messages.read?
-			html = "class='message'"
-		else
+	def messages_class(post)
+		if post.read?
 			html = "class='message read'"
+		else
+			html = "class='message'"
 		end
 		html.html_safe
 	end

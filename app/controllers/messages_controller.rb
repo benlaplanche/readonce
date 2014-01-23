@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
+  helper_method :mark_as_read
   respond_to :html
 
   def create
@@ -19,6 +20,11 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def mark_as_read(message)
+    message.update_attribute(:read, true)
+  end
+
   def message_params
     params[:message].permit :body, :receiver_id
   end
@@ -29,7 +35,7 @@ class MessagesController < ApplicationController
   helper_method :message
 
   def messages
-    @messages ||= current_user.messages
+    @messages ||= current_user.messages.order(created_at: :desc)
   end
   helper_method :messages
 

@@ -17,6 +17,8 @@ group :test do
   gem 'capybara-webkit'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
+  gem 'launchy'
+  gem 'database_cleaner'
 end
 
 group :doc do
