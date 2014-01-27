@@ -1,0 +1,7 @@
+<% if signed_in? %>
+	<div class="row">
+	    <h1>Messages - (<%= messages.count %>)</h1>
+	    <%= render partial: 'messages/message', collection: messages %>
+	</div>
+<% else %>
+<% end %>

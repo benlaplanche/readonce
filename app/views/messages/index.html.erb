@@ -1,6 +1,9 @@
-<div class='container'>
-  <div id='messages'>
-    <h1>Messages - (<%= messages.count %>)</h1>
-      <%= render partial: 'message', collection: messages %>
-  </div>
-</div>
+<% if signed_in? %>
+	<div class="row">
+	    <div class="col-md-12">
+		    <h1>Messages - (<%= messages.count %>)</h1>
+		    <%= render partial: 'message', collection: messages %>
+		</div>
+	</div>
+<% else %>
+<% end %>
