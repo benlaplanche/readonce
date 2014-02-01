@@ -1,7 +1,12 @@
 <% if signed_in? %>
 	<div class="row">
-	    <div class="col-md-12">
-		    <h1>Messages - (<%= messages.count %>)</h1>
+	    <div class="col-lg-3">
+	    	<h2>Send new message...</h2>
+	    	<%= render partial: 'msg_form', object: message %>
+	    </div>
+
+	    <div class="col-lg-9">
+		    <h2>Messages - (<%= messages.count %>)</h2>
 		    <%= render partial: 'message', collection: messages %>
 		</div>
 	</div>

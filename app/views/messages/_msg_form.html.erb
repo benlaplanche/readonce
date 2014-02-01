@@ -1,0 +1,20 @@
+<%= form_for message, html: { class: 'bs-example form-horizontal'} do |f| %>
+
+  <%= field_set_tag do %>
+    <div class='formgroup'>
+    <%= f.label :body, 'Message', class: 'control-label' %>
+    <%= f.text_area :body, autofocus: true, class: 'form-control' %>
+    </div>
+
+    <div class='formgroup'>
+    <%= f.label :body, 'Send to', class: 'control-label' %>
+    <%= f.collection_select :receiver_id, receivers, :id, :email, {include_blank: true}, {class: 'form-control'} %>
+    </div>
+    </br>
+
+    <div class='formgroup'>
+    <%= f.submit "Send", class: 'btn btn-success btn-sm' %>
+    </div>
+
+  <% end %>
+<% end %>
