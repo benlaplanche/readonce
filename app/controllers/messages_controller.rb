@@ -4,7 +4,10 @@ class MessagesController < ApplicationController
   respond_to :html
 
   def create
-    @message = current_user.messages.create(message_params)
+    puts @message.inspect
+    # receiverid = message_params[:receiver_id][0]
+    puts message_params[:receiver_id].length
+    @message = current_user.messages.create(body: message_params[:body], receiver_id: message_params[:receiver_id][0])
     respond_with message, location: messages_url
   end
 
@@ -26,7 +29,7 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params[:message].permit :body, :receiver_id
+    params[:message].permit(:body, { receiver_id: [] })
   end
 
   def message

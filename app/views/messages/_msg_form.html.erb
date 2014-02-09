@@ -8,7 +8,7 @@
 
     <div class='formgroup'>
     <%= f.label :body, 'Send to', class: 'control-label' %>
-    <%= f.collection_select :receiver_id, receivers, :id, :email, {include_blank: true}, {class: 'form-control'} %>
+    <%= f.collection_select :receiver_id, receivers, :id, :email, {include_hidden: false, include_blank: true}, {class: 'form-control', multiple: true} %>
     </div>
     </br>
 
