@@ -4,15 +4,11 @@ class MessagesController < ApplicationController
   respond_to :html
 
   def create
-    puts @message.inspect
-    # receiverid = message_params[:receiver_id][0]
-    # puts message_params[:receiver_id].length
     message_params[:receiver_id].each do |message|
       if !message.empty?
         @message = current_user.messages.create(body: message_params[:body], receiver_id: message)
       end
     end
-    #@message = current_user.messages.create(body: message_params[:body], receiver_id: message_params[:receiver_id][0])
     respond_with message, location: messages_url
   end
 

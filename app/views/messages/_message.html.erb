@@ -1,11 +1,11 @@
 <div class="bs-example">
 	<div class='list-group'>
 		<a href="<%= message_path(message) %>" class='list-group-item'>
-			<div class='list-group-item-heading'>
+			<div>
 				<h4><%= message.sender.email %></h4>
 				<h6><%= time_ago_in_words(message.created_at) %> ago...</h6>
 			</div>
-			<p class='list-group-item-text'><%= truncate(message.body) %></p>
+			<p><%= truncate(message.body) %></p>
 		</a>
 	</div>
 </div>
