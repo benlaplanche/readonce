@@ -4,11 +4,14 @@ class MessagesController < ApplicationController
   respond_to :html
 
   def create
-    message_params[:receiver_id].each do |message|
-      if !message.empty?
-        @message = current_user.messages.create(body: message_params[:body], receiver_id: message)
-      end
-    end
+    # message_params[:receiver_id].each do |message|
+    #   if !message.empty?
+        # @message = current_user.messages.create(body: message_params[:body], receiver_id: message)
+    #   end
+    # end
+    puts message_params.inspect
+    # @message = current_user.messages.create(message_params)
+    Message.create(message_params)
     respond_with message, location: messages_url
   end
 
@@ -16,7 +19,6 @@ class MessagesController < ApplicationController
   end
 
   def index
-
   end
 
   def show
@@ -30,7 +32,7 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params[:message].permit(:body, { receiver_id: [] })
+    params[:message].permit(:body, { user_ids: [] })
   end
 
   def message
@@ -40,6 +42,7 @@ class MessagesController < ApplicationController
 
   def messages
     @messages ||= current_user.messages.order(created_at: :desc)
+    # @messages ||= Message.activities.find_by(user_id: current_user)
   end
   helper_method :messages
 

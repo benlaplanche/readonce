@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_and_belongs_to_many :messages
+  # has_and_belongs_to_many :messages
   # has_many :messages, foreign_key: :sender_id
+has_many :activities
+has_many :messages, through: :activities
 end
