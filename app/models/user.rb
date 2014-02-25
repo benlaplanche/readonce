@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 has_many :activities, class_name: 'Activity', foreign_key: 'sender_id'
-# has_many :sent_messages, through: :activities, foreign_key: 'message_id', class_name: 'Message', source: :sender
 has_many :sent_messages, -> { distinct }, through: :activities, foreign_key: 'sender_id', class_name: 'Message', source: :message
 
 has_many :reverse_activities, class_name: 'Activity', foreign_key: 'receiver_id'
