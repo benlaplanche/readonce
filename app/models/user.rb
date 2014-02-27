@@ -9,4 +9,6 @@ has_many :sent_messages, -> { distinct }, through: :activities, foreign_key: 'se
 
 has_many :reverse_activities, class_name: 'Activity', foreign_key: 'receiver_id'
 has_many :received_messages, through: :reverse_activities, foreign_key: 'receiver_id', class_name: 'Message', source: :message
+# has_many :received_messages, ->(current_user) { where Activity.sender_id: current_user.id }, through: :reverse_activities, foreign_key: 'receiver_id', class_name: 'Message', source: :message
+# scope :foreign, -> { joins(:reverse_activities).where('reverse.activities.sender_id != ?', current_user.id )}
 end
