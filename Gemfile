@@ -15,6 +15,7 @@ gem 'devise'
 group :development do
 	gem 'better_errors'
 	gem 'binding_of_caller'
+	gem 'debugger'
 end
 
 group :test do
@@ -24,6 +25,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'launchy'
   gem 'database_cleaner'
+  gem 'debugger'
 end
 
 group :doc do

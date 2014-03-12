@@ -4,19 +4,42 @@ class ActivityAggregator
 # TODO add a unique check on messages (e.g. sender & receiver are not the same person)
 # TODO return the receiver id's & message read status nested so can be hyperlinked and coloured
   def initialize(current_user, streams)
-    @streams = streams.flatten
+    @streams = streams
     @userid = current_user
   end
 
   def next_activities(limit)
+    # debugger
     activities = []
     while (activities.size < limit) && more_activities? do
-      activities << next_activity
+      puts "***NEXT LOOP***"
+      unless already_exists?(activities, next_activity)
+        puts "BEFORE-----------------------------"
+        puts activities
+        activities << next_activity
+
+        puts "AFTER-----------------------------"
+        puts activities
+      end
     end
     activities
   end
 
 private
+  def already_exists?(activities, next_activity)
+  # check if an entry with the same msg.id already exists
+        puts "/////////////////////////////"
+        puts next_activity
+    a = activities.detect{ |n| n.id == next_activity.id }
+    puts a
+    puts "''''''''''''''''''''''''''''"
+    if a.nil?
+      false
+    else
+      true
+    end
+  end
+
   def next_activity
     msg = select_next_activity
     response = Struct.new(:id, :sender, :receivers, :created_at, :read, :body, :sender_id)
