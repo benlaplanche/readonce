@@ -4,7 +4,8 @@ class ActivityAggregator
 # TODO add a unique check on messages (e.g. sender & receiver are not the same person)
 # TODO return the receiver id's & message read status nested so can be hyperlinked and coloured
   def initialize(current_user, streams)
-    @streams = streams
+    @streams = streams.flatten
+    puts @streams
     @userid = current_user
   end
 
@@ -12,14 +13,13 @@ class ActivityAggregator
     # debugger
     activities = []
     while (activities.size < limit) && more_activities? do
-      puts "***NEXT LOOP***"
-      unless already_exists?(activities, next_activity)
-        puts "BEFORE-----------------------------"
-        puts activities
-        activities << next_activity
 
-        puts "AFTER-----------------------------"
-        puts activities
+        nxt = next_activity
+      unless already_exists?(activities, nxt)
+
+        activities << nxt
+
+
       end
     end
     activities
@@ -28,11 +28,9 @@ class ActivityAggregator
 private
   def already_exists?(activities, next_activity)
   # check if an entry with the same msg.id already exists
-        puts "/////////////////////////////"
-        puts next_activity
+
     a = activities.detect{ |n| n.id == next_activity.id }
-    puts a
-    puts "''''''''''''''''''''''''''''"
+
     if a.nil?
       false
     else
@@ -56,6 +54,7 @@ private
   def select_next_activity
     # subtle bug with the sorting, due to the create action the microseconds on the inserts for multiple
     # receivers means they are sorted incorrectly, removing duplicate message ids should safely ignore this
+    # debugger
     @streams.select{ |s| has_next?(s) }.
       sort_by{ |s| s.peek.created_at }.
       last.next

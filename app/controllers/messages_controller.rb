@@ -41,8 +41,8 @@ class MessagesController < ApplicationController
 
   def messages
   # TODO pass in the limit value & use will_paginate gem
-    sent_stream = current_user.sent_messages.order(:created_at).to_enum :find_each
-    received_stream = current_user.received_messages.order(:created_at).to_enum :find_each
+    sent_stream = current_user.sent_messages.order(created_at: :asc).to_enum :find_each
+    received_stream = current_user.received_messages.order(created_at: :asc).to_enum :find_each
 
     ActivityAggregator.new(current_user.id, [sent_stream, received_stream]).next_activities(1000)
   end
